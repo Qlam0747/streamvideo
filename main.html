@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>BlueTV</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="signin.css">
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="logo">
+      <i class="fas fa-tv"></i>
+      <span class="brand">BlueTV</span>
+    </div>
+    <header class="header">
+      <input type="text" class="search-input" placeholder="Tìm kiếm">
+      <i class="fas fa-search search-icon"></i>
+      <span class="header-actions" id="header-actions">
+        <i class="fas fa-plus header-icon"></i>
+        
+      </span>
+    </header>
+  </div>
+  <div class="container">
+    <aside class="sidebar">
+      <nav>
+        <div class="sidebar-item active"><i class="fas fa-home"></i><span>Trang chủ</span></div>
+        <div class="sidebar-item"><i class="fas fa-bell"></i><span>Kênh đăng ký</span></div>
+        <div class="sidebar-item"><i class="fas fa-clock-rotate-left"></i><span>Video đã xem</span></div>
+        <div class="sidebar-item"><i class="fas fa-list"></i><span>Danh sách phát</span></div>
+        <div class="sidebar-item"><i class="fas fa-clock"></i><span>Xem sau</span></div>
+        <div class="sidebar-item"><i class="fas fa-heart"></i><span>Video đã thích</span></div>
+        <div class="sidebar-item"><i class="fas fa-fire"></i><span>Thịnh hành</span></div>
+        <div class="sidebar-item"><i class="fas fa-cog"></i><span>Cài đặt</span></div>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <section class="videos-grid">
+        <div class="video-card">
+          <div class="video-thumb">
+            <span class="duration">1:00:00</span>
+          </div>
+          <div class="video-info">
+            <i class="fas fa-user avatar"></i>
+            <div>
+              <div class="video-title">Video title</div>
+              <div class="video-meta">
+                <span>abc channel</span>
+                <span>100K Lượt xem</span>
+                <span>2 ngày trước</span>
+              </div>
+            </div>
+            <div class="card-actions">⋮</div>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-thumb">
+            <span class="duration">32:00</span>
+          </div>
+          <div class="video-info">
+            <i class="fas fa-user avatar"></i>
+            <div>
+              <div class="video-title">Video title</div>
+              <div class="video-meta">
+                <span>123 channel</span>
+                <span>1 Tr Lượt xem</span>
+                <span>10 phút trước</span>
+              </div>
+            </div>
+            <div class="card-actions">⋮</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="modal-root"></div>
+  <script>
+    // Giả lập trạng thái đăng nhập
+    let isLoggedIn = false;
+    function renderHeaderActions() {
+      const actions = document.getElementById('header-actions');
+      actions.querySelectorAll('.header-login, .header-register, .header-user').forEach(e => e.remove());
+      if (isLoggedIn) {
+        const userIcon = document.createElement('i');
+        userIcon.className = 'fas fa-user header-icon header-user';
+        userIcon.title = 'Tài khoản';
+        userIcon.onclick = () => alert('Trang tài khoản!');
+        actions.appendChild(userIcon);
+      } else {
+        const loginBtn = document.createElement('button');
+        loginBtn.className = 'header-login';
+        loginBtn.textContent = 'Đăng nhập';
+        loginBtn.id = 'show-signin-btn';
+        loginBtn.onclick = showSigninModal;
+        const registerBtn = document.createElement('button');
+        registerBtn.className = 'header-register';
+        registerBtn.textContent = 'Đăng ký';
+        registerBtn.id = 'show-signup-btn';
+        registerBtn.onclick = showSignupModal;
+        actions.appendChild(loginBtn);
+        actions.appendChild(registerBtn);
+      }
+    }
+
+    function showSigninModal() {
+      fetch('signin.html').then(r => r.text()).then(html => {
+        document.getElementById('modal-root').innerHTML = html;
+        setTimeout(() => {
+          const overlay = document.querySelector('.signin-overlay');
+          if (overlay) {
+            overlay.addEventListener('click', function(e) {
+              if (e.target === overlay) closeModal();
+            });
+          }
+          // Xử lý chuyển sang đăng ký
+          const link = document.querySelector('.register-link');
+          if (link) link.onclick = (e) => { e.preventDefault(); showSignupModal(); };
+        });
+        document.addEventListener('keydown', escListener);
+      });
+    }
+    function showSignupModal() {
+      fetch('signup.html').then(r => r.text()).then(html => {
+        document.getElementById('modal-root').innerHTML = html;
+        setTimeout(() => {
+          const overlay = document.querySelector('.signup-overlay');
+          if (overlay) {
+            overlay.addEventListener('click', function(e) {
+              if (e.target === overlay) closeModal();
+            });
+          }
+          // Xử lý chuyển sang đăng nhập
+          const link = document.querySelector('.signin-link');
+          if (link) link.onclick = (e) => { e.preventDefault(); showSigninModal(); };
+        });
+        document.addEventListener('keydown', escListener);
+      });
+    }
+    function closeModal() {
+      document.getElementById('modal-root').innerHTML = '';
+      document.removeEventListener('keydown', escListener);
+    }
+    function escListener(e) {
+      if (e.key === 'Escape') closeModal();
+    }
+    renderHeaderActions();
+  </script>
+</body>
+</html>
