@@ -15,10 +15,10 @@
 /* Modal */
 .signup-modal {
   background: #fff;
-  border-radius: 18px;
+  border-radius: 10px;
   box-shadow: 0 8px 32px 0 rgba(64,158,255,0.18), 0 0 0 1.5px #ececec;
-  padding: 38px 44px 30px 44px;
-  min-width: 340px;
+  padding: 22px 24px 18px 24px;
+  min-width: 300px;
   max-width: 95vw;
   width: 100%;
   display: flex;
@@ -26,8 +26,8 @@
   align-items: center;
 }
 .signup-modal h2 {
-  margin: 0 0 22px 0;
-  font-size: 30px;
+  margin: 0 0 14px 0;
+  font-size: 20px;
   color: #111;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -37,24 +37,24 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 10px;
 }
 .signup-modal label {
-  font-size: 16px;
+  font-size: 13px;
   color: #333;
-  margin-bottom: 4px;
-  margin-left: 4px;
+  margin-bottom: 2px;
+  margin-left: 2px;
 }
 .signup-modal input[type="text"],
 .signup-modal input[type="password"],
 .signup-modal input[type="date"],
 .signup-modal input[type="email"] {
   width: 100%;
-  padding: 13px 18px;
+  padding: 8px 12px;
   border: none;
-  border-radius: 18px;
+  border-radius: 10px;
   background: #d2edf3;
-  font-size: 18px;
+  font-size: 15px;
   outline: none;
   transition: box-shadow 0.18s;
   box-shadow: 0 0 0 1.5px #d2edf3;
@@ -64,14 +64,14 @@
   background: #eaf6fb;
 }
 .signup-modal button[type="submit"] {
-  margin-top: 12px;
+  margin-top: 8px;
   width: 100%;
-  padding: 13px 0;
+  padding: 9px 0;
   background: #6ea8fe;
   color: #fff;
   border: none;
-  border-radius: 18px;
-  font-size: 20px;
+  border-radius: 10px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.18s, color 0.18s;
@@ -82,8 +82,8 @@
   color: #fff;
 }
 .signup-footer {
-  margin-top: 22px;
-  font-size: 17px;
+  margin-top: 12px;
+  font-size: 14px;
   color: #222;
   text-align: center;
 }
@@ -101,12 +101,12 @@
 @media (max-width: 600px) {
   .signup-modal {
     min-width: 0;
-    padding: 18px 6vw 18px 6vw;
+    padding: 10px 3vw 10px 3vw;
   }
   .signup-modal h2 {
-    font-size: 22px;
+    font-size: 16px;
   }
   .signup-modal button[type="submit"] {
-    font-size: 16px;
+    font-size: 13px;
   }
 }

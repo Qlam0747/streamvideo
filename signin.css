@@ -15,19 +15,19 @@
 /* Modal */
 .signin-modal {
   background: #fff;
-  border-radius: 18px;
+  border-radius: 16px;
   box-shadow: 0 8px 32px 0 rgba(64,158,255,0.18), 0 0 0 1.5px #ececec;
-  padding: 38px 44px 30px 44px;
-  min-width: 340px;
-  max-width: 95vw;
-  width: 100%;
+  padding: 36px 32px 28px 32px;
+  min-width: 320px;
+  max-width: 480px;
+  width: 90vw;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .signin-modal h2 {
-  margin: 0 0 22px 0;
-  font-size: 30px;
+  margin: 0 0 24px 0;
+  font-size: 28px;
   color: #111;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -37,22 +37,23 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
 }
 .signin-modal label {
   font-size: 16px;
-  color: #333;
-  margin-bottom: 4px;
-  margin-left: 4px;
+  color: #222;
+  margin-bottom: 6px;
+  margin-left: 2px;
+  text-align: left;
 }
 .signin-modal input[type="text"],
 .signin-modal input[type="password"] {
   width: 100%;
-  padding: 13px 18px;
+  padding: 14px 20px;
   border: none;
-  border-radius: 18px;
+  border-radius: 20px;
   background: #d2edf3;
-  font-size: 18px;
+  font-size: 17px;
   outline: none;
   transition: box-shadow 0.18s;
   box-shadow: 0 0 0 1.5px #d2edf3;
@@ -62,26 +63,27 @@
   background: #eaf6fb;
 }
 .signin-modal button[type="submit"] {
-  margin-top: 12px;
-  width: 100%;
+  margin-top: 18px;
+  width: 60%;
+  align-self: center;
   padding: 13px 0;
-  background: #6ea8fe;
-  color: #fff;
+  background: #a5c8fa;
+  color: #222;
   border: none;
-  border-radius: 18px;
-  font-size: 20px;
+  border-radius: 20px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.18s, color 0.18s;
   box-shadow: 0 2px 8px 0 #b3d8ff33;
 }
 .signin-modal button[type="submit"]:hover {
-  background: #409eff;
+  background: #6ea8fe;
   color: #fff;
 }
 .signin-footer {
-  margin-top: 22px;
-  font-size: 17px;
+  margin-top: 24px;
+  font-size: 16px;
   color: #222;
   text-align: center;
 }
@@ -99,12 +101,14 @@
 @media (max-width: 600px) {
   .signin-modal {
     min-width: 0;
-    padding: 18px 6vw 18px 6vw;
+    padding: 10px 3vw 10px 3vw;
+    max-width: 98vw;
   }
   .signin-modal h2 {
-    font-size: 22px;
+    font-size: 20px;
   }
   .signin-modal button[type="submit"] {
-    font-size: 16px;
+    font-size: 15px;
+    width: 100%;
   }
 }
