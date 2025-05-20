@@ -18,8 +18,15 @@
       <input type="text" class="search-input" placeholder="Tìm kiếm">
       <i class="fas fa-search search-icon"></i>
       <span class="header-actions" id="header-actions">
-        <i class="fas fa-plus header-icon"></i>
-        
+        <i class="fas fa-plus header-icon" id="plus-btn"></i>
+        <div class="plus-menu" id="plus-menu" style="display:none;">
+          <div class="plus-menu-item">
+            <i class="fas fa-play"></i> Upload video
+          </div>
+          <div class="plus-menu-item">
+            <i class="fas fa-broadcast-tower"></i> Go live
+          </div>
+        </div>
       </span>
     </header>
   </div>
@@ -155,6 +162,21 @@
       if (e.key === 'Escape') closeModal();
     }
     renderHeaderActions();
+
+    // Hiện/ẩn menu khi bấm dấu cộng
+    const plusBtn = document.getElementById('plus-btn');
+    const plusMenu = document.getElementById('plus-menu');
+    if (plusBtn && plusMenu) {
+      plusBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        plusMenu.style.display = plusMenu.style.display === 'none' ? 'block' : 'none';
+      });
+      document.addEventListener('click', function(e) {
+        if (!plusMenu.contains(e.target) && e.target !== plusBtn) {
+          plusMenu.style.display = 'none';
+        }
+      });
+    }
   </script>
 </body>
 </html>
