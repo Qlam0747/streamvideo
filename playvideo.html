@@ -24,8 +24,32 @@
   </div>
   <div class="main-content">
     <div class="left-content">
-      <div class="video-player">
-        <div class="play-button"><i class="fas fa-play"></i></div>
+      <div class="video-player" id="video-player">
+        <video id="main-video" width="100%" height="100%" poster="https://i.imgur.com/8Km9tLL.jpg">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Trình duyệt của bạn không hỗ trợ video.
+        </video>
+        <div class="video-controls" id="video-controls">
+          <div class="progress-bar-container">
+            <div class="progress-bar-bg">
+              <div class="progress-bar" id="progress-bar"></div>
+              <div class="progress-knob" id="progress-knob"></div>
+            </div>
+          </div>
+          <div class="controls-row">
+            <button class="control-btn" id="btn-back"><i class="fas fa-step-backward"></i></button>
+            <button class="control-btn" id="btn-play"><i class="fas fa-play"></i></button>
+            <button class="control-btn" id="btn-pause" style="display:none"><i class="fas fa-pause"></i></button>
+            <button class="control-btn" id="btn-forward"><i class="fas fa-step-forward"></i></button>
+            <button class="control-btn" id="btn-volume"><i class="fas fa-volume-up"></i></button>
+            <span class="time-display" id="time-display">0:00 / 0:00</span>
+            <div style="flex:1"></div>
+            <button class="control-btn"><i class="fas fa-closed-captioning"></i></button>
+            <button class="control-btn"><i class="fas fa-cog"></i></button>
+            <button class="control-btn"><i class="fas fa-window-restore"></i></button>
+            <button class="control-btn"><i class="fas fa-expand"></i></button>
+          </div>
+        </div>
       </div>
       <div class="video-title">Video title</div>
       <div class="video-info-row">
@@ -114,5 +138,71 @@
       </div>
     </div>
   </div>
+  <script>
+  // Video controls logic
+  const video = document.getElementById('main-video');
+  const playBtn = document.getElementById('btn-play');
+  const pauseBtn = document.getElementById('btn-pause');
+  const progressBar = document.getElementById('progress-bar');
+  const progressKnob = document.getElementById('progress-knob');
+  const progressBarBg = document.querySelector('.progress-bar-bg');
+  const timeDisplay = document.getElementById('time-display');
+
+  function formatTime(sec) {
+    sec = Math.floor(sec);
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  }
+
+  function updateProgress() {
+    const percent = (video.currentTime / video.duration) * 100;
+    progressBar.style.width = percent + '%';
+    progressKnob.style.left = percent + '%';
+    timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+  }
+
+  video.addEventListener('timeupdate', updateProgress);
+  video.addEventListener('loadedmetadata', updateProgress);
+
+  playBtn.onclick = function() {
+    video.play();
+    playBtn.style.display = 'none';
+    pauseBtn.style.display = '';
+  };
+  pauseBtn.onclick = function() {
+    video.pause();
+    playBtn.style.display = '';
+    pauseBtn.style.display = 'none';
+  };
+  video.addEventListener('play', () => {
+    playBtn.style.display = 'none';
+    pauseBtn.style.display = '';
+  });
+  video.addEventListener('pause', () => {
+    playBtn.style.display = '';
+    pauseBtn.style.display = 'none';
+  });
+
+  progressBarBg.addEventListener('click', function(e) {
+    const rect = progressBarBg.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    video.currentTime = percent * video.duration;
+  });
+
+  // Show controls on mousemove
+  const videoPlayer = document.getElementById('video-player');
+  let controlsTimeout;
+  videoPlayer.addEventListener('mousemove', () => {
+    videoPlayer.classList.add('show-controls');
+    clearTimeout(controlsTimeout);
+    controlsTimeout = setTimeout(() => {
+      videoPlayer.classList.remove('show-controls');
+    }, 2000);
+  });
+  videoPlayer.addEventListener('mouseleave', () => {
+    videoPlayer.classList.remove('show-controls');
+  });
+  </script>
 </body>
 </html>
