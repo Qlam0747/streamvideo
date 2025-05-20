@@ -104,6 +104,15 @@
       }
     }
 
+    // Thêm xử lý click vào video card
+    document.querySelectorAll('.video-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        // Không chuyển trang nếu click vào nút menu
+        if (e.target.closest('.card-actions')) return;
+        window.location.href = 'playvideo.html';
+      });
+    });
+
     function showSigninModal() {
       fetch('signin.html').then(r => r.text()).then(html => {
         document.getElementById('modal-root').innerHTML = html;
